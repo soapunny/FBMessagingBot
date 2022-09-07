@@ -337,17 +337,10 @@ public class Automate {
 		try{
 			if(elements != null && elements.size() > 0){//fetching links and name
 				for(WebElement element : elements) {
-					links.add(element.getAttribute("href")); // add the 1:1 message link
-					names.add(element.findElement(By.xpath(".//strong")).getAttribute("innerHTML"));// add property info
-				}
-			}else{
-				final String NEW_MESSAGE_ELEMENTS_XPATH = EnvHelper.getInstance().getValue("NEW_MESSAGE_ELEMENTS_XPATH");
-				elements = Util.findElements(FindElementBy.XPATH, NEW_MESSAGE_ELEMENTS_XPATH);
-
-				if(elements != null && elements.size() > 0){//fetching links and name
-					for(WebElement element : elements) {
+					String messageName = element.findElement(By.xpath(".//strong")).getAttribute("innerHTML");
+					if(messageName.contains("·") && messageName.contains("(")) {
+						names.add(messageName);// add property info
 						links.add(element.getAttribute("href")); // add the 1:1 message link
-						names.add(element.getAttribute("innerText"));// add property info
 					}
 				}
 			}
@@ -355,7 +348,7 @@ public class Automate {
 			logger.info(e.getMessage());
 		}
 
-		logger.info("Total new message : "+ (elements == null ? 0 : elements.size()));
+		logger.info("Total new message : "+ links.size());
 		logger.debug("links : "+links);
 		logger.debug("names : "+names);
 

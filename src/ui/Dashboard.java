@@ -60,12 +60,10 @@ public class Dashboard extends JFrame{
 	public static void main(String args[]) {
 		Util.getLog4j();
 		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				logger.info("==========Start App===========");
-				new Dashboard().setVisible(true);
-			}
-		});
+		EventQueue.invokeLater(() -> {
+            logger.info("==========Start App===========");
+            new Dashboard().setVisible(true);
+        });
 	}
 	
 	
@@ -115,11 +113,11 @@ public class Dashboard extends JFrame{
         jPanel1.setBackground(new Color(24, 118, 242));
         jPanel1.setPreferredSize(new Dimension(714, 60));
 
-        jLabel1.setFont(new Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel1.setFont(new Font("Century Gothic", Font.PLAIN, 18)); // NOI18N
         jLabel1.setForeground(new Color(255, 255, 255));
         jLabel1.setText("Advance Reply Bot - AI Version");
 
-        jLabel2.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel2.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         jLabel2.setForeground(new Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel2.setText("Logout");
@@ -156,36 +154,32 @@ public class Dashboard extends JFrame{
         jPanel2.setBackground(new Color(57, 57, 57));
 
         email.setBackground(new Color(57, 57, 57));
-        email.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        email.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         email.setForeground(new Color(255, 255, 255));
         email.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
 
-        jLabel3.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel3.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         jLabel3.setForeground(new Color(255, 255, 255));
         jLabel3.setText("Facebook Email");
 
-        jLabel4.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel4.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         jLabel4.setForeground(new Color(255, 255, 255));
         jLabel4.setText("Facebook Password");
 
         password.setBackground(new Color(57, 57, 57));
-        password.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        password.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         password.setForeground(new Color(255, 255, 255));
         password.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
 
         login.setBackground(new Color(24, 118, 242));
-        login.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login.setForeground(new Color(255, 255, 255));
         login.setText("Login");
         login.setBorderPainted(false);
         login.setFocusPainted(false);
-        login.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                loginFacebook();
-            }
-        });
+        login.addActionListener(evt -> loginFacebook());
 
-        jLabel5.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel5.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         jLabel5.setForeground(new Color(255, 255, 255));
         jLabel5.setText("Tag Based Response");
 
@@ -194,10 +188,10 @@ public class Dashboard extends JFrame{
         		new Object[][] {},
         		new String[] {"id", "Product Name", "Email", "Question", "Response Message"}
     		){
-	        	Class[] types = new Class[] {
+	        	final Class[] types = new Class[] {
 	        			Integer.class, String.class, String.class, String.class, String.class
 	        	};
-	        	boolean[] canEdit = new boolean[] {
+	        	final boolean[] canEdit = new boolean[] {
 	        			false, false, false, false, false
 	        	};
 	        	public Class getColumnClass(int columnIndex) {
@@ -213,38 +207,30 @@ public class Dashboard extends JFrame{
         }
 
         login1.setBackground(new Color(24, 118, 242));
-        login1.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login1.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login1.setForeground(new Color(255, 255, 255));
         login1.setText("Add");
         login1.setBorderPainted(false);
         login1.setFocusPainted(false);
-        login1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                addItemMessage(evt);
-            }
-        });
+        login1.addActionListener(this::addItemMessage);
 
         login2.setBackground(new Color(24, 118, 242));
-        login2.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login2.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login2.setForeground(new Color(255, 255, 255));
         login2.setText("Delete");
         login2.setBorderPainted(false);
         login2.setFocusPainted(false);
-        login2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                deleteItemMessage(evt);
-            }
-        });
+        login2.addActionListener(this::deleteItemMessage);
 
         keywordTable.setModel(
     		new DefaultTableModel(
         		new Object[][] {},
         		new String[] {"id", "Product Name", "Keywords", "Response Message"}
         	) {
-			Class[] types = new Class[] {
+			final Class[] types = new Class[] {
         			Integer.class, String.class, Object.class, Object.class
         	};
-        	boolean[] canEdit = new boolean[] {
+        	final boolean[] canEdit = new boolean[] {
         			false, false, false, false
         	};
         	public Class getColumnClass(int columnIndex) {
@@ -260,72 +246,52 @@ public class Dashboard extends JFrame{
         }
 
         login3.setBackground(new Color(24, 118, 242));
-        login3.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login3.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login3.setForeground(new Color(255, 255, 255));
         login3.setText("Delete");
         login3.setBorderPainted(false);
         login3.setFocusPainted(false);
-        login3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                deleteKeywordMessage(evt);
-            }
-        });
+        login3.addActionListener(this::deleteKeywordMessage);
 
         login4.setBackground(new Color(24, 118, 242));
-        login4.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login4.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login4.setForeground(new Color(255, 255, 255));
         login4.setText("Add");
         login4.setBorderPainted(false);
         login4.setFocusPainted(false);
-        login4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                addKeywordMessage(evt);
-            }
-        });
+        login4.addActionListener(this::addKeywordMessage);
 
-        jLabel6.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel6.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         jLabel6.setForeground(new Color(255, 255, 255));
         jLabel6.setText("Product Based Response");
 
         login5.setBackground(new Color(24, 118, 242));
-        login5.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login5.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login5.setForeground(new Color(255, 255, 255));
         login5.setText("Start Bot");
         login5.setBorderPainted(false);
         login5.setFocusPainted(false);
-        login5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                startBot(evt);
-            }
-        });
+        login5.addActionListener(this::startBot);
         hasLogined = false;
         login5.setEnabled(hasLogined);
 
         login6.setBackground(new Color(24, 118, 242));
-        login6.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login6.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login6.setForeground(new Color(255, 255, 255));
         login6.setText("Stop Bot");
         login6.setBorderPainted(false);
         login6.setFocusPainted(false);
-        login6.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                stopBot(evt);
-            }
-        });
+        login6.addActionListener(this::stopBot);
 
         login7.setBackground(new Color(24, 118, 242));
-        login7.setFont(new Font("Century Gothic", 1, 14)); // NOI18N
+        login7.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
         login7.setForeground(new Color(255, 255, 255));
         login7.setText("Edit");
         login7.setBorderPainted(false);
         login7.setFocusPainted(false);
-        login7.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                editItemMessage(evt);
-            }
-        });
+        login7.addActionListener(this::editItemMessage);
 
-        log.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        log.setFont(new Font("Tahoma", Font.PLAIN, 12)); // NOI18N
         log.setForeground(new Color(255, 255, 255));
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
@@ -415,24 +381,24 @@ public class Dashboard extends JFrame{
 
         jPanel3.setBackground(new Color(57, 57, 57));
         
-        isBotOnL.setFont(new Font("Century Gothic", 0, 20)); // NOI18N
+        isBotOnL.setFont(new Font("Century Gothic", Font.PLAIN, 20)); // NOI18N
         isBotOnL.setForeground(new Color(255, 200, 200));
         isBotOnL.setText("WakeUp Time(HHmm)");
         
-        wakeUpTimeL.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        wakeUpTimeL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         wakeUpTimeL.setForeground(new Color(255, 255, 255));
         wakeUpTimeL.setText("WakeUp Time(HHmm)");
         
-        sleepTimeL.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        sleepTimeL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         sleepTimeL.setForeground(new Color(255, 255, 255));
         sleepTimeL.setText("Sleep Time(HHmm)");
 
-        sleepFuncL.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        sleepFuncL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         sleepFuncL.setForeground(new Color(255, 255, 255));
         sleepFuncL.setText("Use Sleep Time?");
 
         wakeUpTimeT.setBackground(new Color(57, 57, 57));
-        wakeUpTimeT.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        wakeUpTimeT.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         wakeUpTimeT.setForeground(new Color(255, 255, 255));
         wakeUpTimeT.setText("0600");
         wakeUpTimeT.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
@@ -440,7 +406,7 @@ public class Dashboard extends JFrame{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				try {
-					checkSleepTime(e, wakeUpTimeT);
+					checkSleepTime(wakeUpTimeT);
 				} catch (BadLocationException ex) {
 					logger.error(ex.getMessage());
 				}	
@@ -448,7 +414,7 @@ public class Dashboard extends JFrame{
 		});
         
         sleepTimeT.setBackground(new Color(57, 57, 57));
-        sleepTimeT.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        sleepTimeT.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         sleepTimeT.setForeground(new Color(255, 255, 255));
         sleepTimeT.setText("2200");
         sleepTimeT.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
@@ -456,7 +422,7 @@ public class Dashboard extends JFrame{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				try {
-					checkSleepTime(e, sleepTimeT);
+					checkSleepTime(sleepTimeT);
 				} catch (BadLocationException ex) {
 					logger.error(ex.getMessage());
 				}
@@ -464,17 +430,12 @@ public class Dashboard extends JFrame{
 		});
         
         sleepFunc.setBackground(new Color(57, 57, 57));
-        sleepFunc.setFont(new Font("Century Gothic", 0, 14)); // NOI18N
+        sleepFunc.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         sleepFunc.setForeground(new Color(255, 255, 255));
         sleepFunc.setSelected(true);
         sleepFunc.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
         
-        sleepFunc.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				useSleepFunc();
-			}
-		});
+        sleepFunc.addActionListener(e -> useSleepFunc());
         
         GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -561,10 +522,10 @@ public class Dashboard extends JFrame{
 		
 		setVisible(true);
 		
-		isBotOn = new TmpValueStorage<Boolean>(false);
+		isBotOn = new TmpValueStorage<>(false);
 	}
 	
-	protected void checkSleepTime(KeyEvent e, JTextField timeField) throws BadLocationException {
+	protected void checkSleepTime(JTextField timeField) throws BadLocationException {
 		int length = timeField.getText().length();
 		if(length <= 0) return;
 		
@@ -594,8 +555,7 @@ public class Dashboard extends JFrame{
 		int wakeUpTimeLen = wakeUpTimeT.getText().length();
 		
 		if(sleepTimeLen == 4 && wakeUpTimeLen == 4) {
-			if(sleepTimeT.getText().compareTo(wakeUpTimeT.getText()) != 0)
-				return true;
+			return sleepTimeT.getText().compareTo(wakeUpTimeT.getText()) != 0;
 		}
 		
 		return false;
@@ -665,20 +625,18 @@ public class Dashboard extends JFrame{
 		
 		if(!email.equals("") && !password.equals("")) {
 			ThreadPool.getInstance().execute(
-				new Runnable() {
-					public void run() {
-						try {
-							hasLogined = Automate.getInstance().login(email, password);
-							login.setEnabled(false);
-						}catch(CannotLoginException e) {
-							JOptionPane.showMessageDialog(null, "Facebook login failed. Try again.");
-							logger.error(e.getMessage());
-							Automate.getInstance().close();
-						}finally {
-							login5.setEnabled(hasLogined);
-						}
-					}
-			});
+                    () -> {
+                        try {
+                            hasLogined = Automate.getInstance().login(email, password);
+                            login.setEnabled(false);
+                        }catch(CannotLoginException e) {
+                            JOptionPane.showMessageDialog(null, "Facebook login failed. Try again.");
+                            logger.error(e.getMessage());
+                            Automate.getInstance().close();
+                        }finally {
+                            login5.setEnabled(hasLogined);
+                        }
+                    });
 		}else {
 			JOptionPane.showMessageDialog(null, "Enter email and password");
 		}
@@ -750,55 +708,50 @@ public class Dashboard extends JFrame{
 			JOptionPane.showMessageDialog(null, "Invalid Time Set");
 			return;
 		}
-		task = new Thread() {
-			@Override
-			public void run() {
-				setEnableSleepFunc(false);
-				isBotOn.setValue(true);
-				TmpValueStorage<Boolean> isThreadOn = isBotOn;
+		task = new Thread(() -> {
+            setEnableSleepFunc(false);
+            isBotOn.setValue(true);
+            TmpValueStorage<Boolean> isThreadOn = isBotOn;
 
-				while(isThreadOn.getValue())
-				{
-					try {
-                        Automate.getInstance().browsePosts(log);
-						if(hasSleepTime()) {
-							if(Automate.getInstance().isTimeToSleep(sleepTimeT.getText().trim(), wakeUpTimeT.getText().trim())) {
-								logger.info("[Bot is sleeping]");
-								isBotOnL.setText("Bot On[Sleeping]");
-							}else {
-								isBotOnL.setText("Bot On[Working]");
-								logger.info("[Bot is working(has sleep time)]");
-								try {
-									//Automate.getInstance().likePosts(log);
-									Automate.getInstance().doMessage(log, isThreadOn);
-                                    //Automate.getInstance().watchVideo(log);
-								} catch (ElementNotFoundException e) {
-									logger.error(e.getMessage());
-								}
-								if(!isThreadOn.getValue()) return;
-							}
-						}else {
-							isBotOnL.setText("Bot On[Working]");
-							logger.info("[Bot is working(has no sleep time)]");
-							try {
-								//Automate.getInstance().likePosts(log);
-								Automate.getInstance().doMessage(log, isThreadOn);
-                                //Automate.getInstance().watchVideo(log);
-							} catch (ElementNotFoundException e) {
-								logger.error(e.getMessage());
-							}
-							if(!isThreadOn.getValue()) return;
-						}
-					} catch (Exception e) {
-		                JOptionPane.showMessageDialog(null, "Error: messaging fail");
-						logger.error(e.getMessage());
-					} finally {
-						if(!isThreadOn.getValue()) return;
-						Util.sleepRandom(10, 20);//10~20 mins cycle
-					}
-				}
-			}
-		};
+            while(isThreadOn.getValue()) {
+                try {
+Automate.getInstance().browsePosts(log);
+                    if(hasSleepTime()) {
+                        if(Automate.getInstance().isTimeToSleep(sleepTimeT.getText().trim(), wakeUpTimeT.getText().trim())) {
+                            logger.info("[Bot is sleeping]");
+                            isBotOnL.setText("Bot On[Sleeping]");
+                        }else {
+                            isBotOnL.setText("Bot On[Working]");
+                            logger.info("[Bot is working(has sleep time)]");
+                            try {
+                                //Automate.getInstance().likePosts(log);
+                                Automate.getInstance().doMessage(log, isThreadOn);
+//Automate.getInstance().watchVideo(log);
+                            } catch (ElementNotFoundException e) {
+                                logger.error(e.getMessage());
+                            }
+                            if(!isThreadOn.getValue()) return;
+                        }
+                    }else {
+                        isBotOnL.setText("Bot On[Working]");
+                        logger.info("[Bot is working(has no sleep time)]");
+                        try {
+                            //Automate.getInstance().likePosts(log);
+                            Automate.getInstance().doMessage(log, isThreadOn);
+//Automate.getInstance().watchVideo(log);
+                        } catch (ElementNotFoundException e) {
+                            logger.error(e.getMessage());
+                        }
+                        if(!isThreadOn.getValue()) return;
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error: messaging fail");
+                    logger.error(e.getMessage());
+                }
+                if(!isThreadOn.getValue()) return;
+                Util.sleepRandom(10, 20);//10~20 mins cycle
+            }
+        });
 		ThreadPool.getInstance().execute(task);
 		login5.setEnabled(false);
 		logger.info("[Bot start]");
@@ -812,7 +765,7 @@ public class Dashboard extends JFrame{
 				((Thread)task).interrupt();
 				task = null;
 				isBotOn.setValue(false);
-				isBotOn = new TmpValueStorage<Boolean>(false);
+				isBotOn = new TmpValueStorage<>(false);
 			}
 		}catch(Exception e) {
 			logger.error(e.getMessage());

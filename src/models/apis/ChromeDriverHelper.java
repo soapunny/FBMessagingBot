@@ -33,6 +33,7 @@ public class ChromeDriverHelper {
 				System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 				ChromeOptions options = new ChromeOptions();
 				options.setExperimentalOption("excludeSwitches", new String[] {"enable-automation"});
+				options.addArguments("--ignore-certificate-errors");
 				options.addArguments("--disable-extensions");
 				Map<String, Object> prefs = new HashMap<String, Object>();
 				prefs.put("profile.default_content_setting_values.notifications", 2);
