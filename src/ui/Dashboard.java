@@ -22,12 +22,12 @@ public class Dashboard extends JFrame{
 	private JTextField email;
 	private JTextField wakeUpTimeT;
 	private JTextField sleepTimeT;
-	private JLabel jLabel1;
-	private JLabel jLabel2;
-	private JLabel jLabel3;
-	private JLabel jLabel4;
-	private JLabel jLabel5;
-	private JLabel jLabel6;
+	private JLabel botTitleL;
+	private JLabel logoutL;
+	private JLabel emailL;
+	private JLabel passwordL;
+	private JLabel keywordBasedL;
+	private JLabel itemBasedL;
 	private JLabel wakeUpTimeL;
 	private JLabel sleepTimeL;
 	private JLabel isBotOnL;
@@ -38,34 +38,22 @@ public class Dashboard extends JFrame{
 	private JScrollPane jScrollPane1;
 	private JScrollPane jScrollPane2;
 	private JTable keywordTable;
-	private JButton login;
-	private JButton login1;
-	private JButton login2;
-	private JButton login3;
-	private JButton login4;
-	private JButton login5;
-	private JButton login6;
-	private JButton login7;
+	private JButton loginBtn;
+	private JButton addItemBtn;
+	private JButton deleteItemBtn;
+	private JButton deleteKeywordBtn;
+	private JButton addKeywordBtn;
+	private JButton startBotBtn;
+	private JButton stopBotBtn;
+	private JButton editItemBtn;
 	private JPasswordField password;
-	private JTable productTable;
+	private JTable itemTable;
 	private JLabel sleepFuncL;
 	private JCheckBox sleepFunc;
-	
 	private Runnable task;
 	private TmpValueStorage<Boolean> isBotOn;
-	private boolean hasLogined;
-	
+	private boolean login;
 	private static final Logger logger = Logger.getLogger(Dashboard.class);
-	
-	public static void main(String args[]) {
-		Util.getLog4j();
-		
-		EventQueue.invokeLater(() -> {
-            logger.info("==========Start App===========");
-            new Dashboard().setVisible(true);
-        });
-	}
-	
 	
 	public Dashboard() {
 		initComponents();
@@ -73,27 +61,27 @@ public class Dashboard extends JFrame{
 	
 	private void initComponents() {
         jPanel1 = new JPanel();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
+        botTitleL = new JLabel();
+        logoutL = new JLabel();
         jPanel2 = new JPanel();
         email = new JTextField();
-        jLabel3 = new JLabel();
-        jLabel4 = new JLabel();
+        emailL = new JLabel();
+        passwordL = new JLabel();
         password = new JPasswordField();
-        login = new JButton();
-        jLabel5 = new JLabel();
+        loginBtn = new JButton();
+        keywordBasedL = new JLabel();
         jScrollPane1 = new JScrollPane();
-        productTable = new JTable();
-        login1 = new JButton();
-        login2 = new JButton();
+        itemTable = new JTable();
+        addItemBtn = new JButton();
+        deleteItemBtn = new JButton();
         jScrollPane2 = new JScrollPane();
         keywordTable = new JTable();
-        login3 = new JButton();
-        login4 = new JButton();
-        jLabel6 = new JLabel();
-        login5 = new JButton();
-        login6 = new JButton();
-        login7 = new JButton();
+        deleteKeywordBtn = new JButton();
+        addKeywordBtn = new JButton();
+        itemBasedL = new JLabel();
+        startBotBtn = new JButton();
+        stopBotBtn = new JButton();
+        editItemBtn = new JButton();
         log = new JLabel();
         jPanel3 = new JPanel();
         wakeUpTimeL = new JLabel();
@@ -113,16 +101,16 @@ public class Dashboard extends JFrame{
         jPanel1.setBackground(new Color(24, 118, 242));
         jPanel1.setPreferredSize(new Dimension(714, 60));
 
-        jLabel1.setFont(new Font("Century Gothic", Font.PLAIN, 18)); // NOI18N
-        jLabel1.setForeground(new Color(255, 255, 255));
-        jLabel1.setText("Advance Reply Bot - AI Version");
+        botTitleL.setFont(new Font("Century Gothic", Font.PLAIN, 18)); // NOI18N
+        botTitleL.setForeground(new Color(255, 255, 255));
+        botTitleL.setText("Advance Reply Bot - AI Version");
 
-        jLabel2.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
-        jLabel2.setForeground(new Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel2.setText("Logout");
-        jLabel2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new MouseAdapter() {
+        logoutL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
+        logoutL.setForeground(new Color(255, 255, 255));
+        logoutL.setHorizontalAlignment(SwingConstants.CENTER);
+        logoutL.setText("Logout");
+        logoutL.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        logoutL.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 logoutFacebook();
             }
@@ -134,9 +122,9 @@ public class Dashboard extends JFrame{
             jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(botTitleL)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
-                .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+                .addComponent(logoutL, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,8 +132,8 @@ public class Dashboard extends JFrame{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(jLabel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botTitleL, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(logoutL, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -158,32 +146,32 @@ public class Dashboard extends JFrame{
         email.setForeground(new Color(255, 255, 255));
         email.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
 
-        jLabel3.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
-        jLabel3.setForeground(new Color(255, 255, 255));
-        jLabel3.setText("Facebook Email");
+        emailL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
+        emailL.setForeground(new Color(255, 255, 255));
+        emailL.setText("Facebook Email");
 
-        jLabel4.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
-        jLabel4.setForeground(new Color(255, 255, 255));
-        jLabel4.setText("Facebook Password");
+        passwordL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
+        passwordL.setForeground(new Color(255, 255, 255));
+        passwordL.setText("Facebook Password");
 
         password.setBackground(new Color(57, 57, 57));
         password.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
         password.setForeground(new Color(255, 255, 255));
         password.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
 
-        login.setBackground(new Color(24, 118, 242));
-        login.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login.setForeground(new Color(255, 255, 255));
-        login.setText("Login");
-        login.setBorderPainted(false);
-        login.setFocusPainted(false);
-        login.addActionListener(evt -> loginFacebook());
+        loginBtn.setBackground(new Color(24, 118, 242));
+        loginBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        loginBtn.setForeground(new Color(255, 255, 255));
+        loginBtn.setText("Login");
+        loginBtn.setBorderPainted(false);
+        loginBtn.setFocusPainted(false);
+        loginBtn.addActionListener(evt -> loginFacebook());
 
-        jLabel5.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
-        jLabel5.setForeground(new Color(255, 255, 255));
-        jLabel5.setText("Tag Based Response");
+        keywordBasedL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
+        keywordBasedL.setForeground(new Color(255, 255, 255));
+        keywordBasedL.setText("Tag Based Response");
 
-        productTable.setModel(
+        itemTable.setModel(
     		new DefaultTableModel(
         		new Object[][] {},
         		new String[] {"id", "Product Name", "Email", "Question", "Response Message"}
@@ -201,26 +189,26 @@ public class Dashboard extends JFrame{
 	        		return canEdit[columnIndex];
 	        	}
 		});
-        jScrollPane1.setViewportView(productTable);
-        if(productTable.getColumnModel().getColumnCount() > 0) {
-        	productTable.getColumnModel().getColumn(0).setMaxWidth(50);
+        jScrollPane1.setViewportView(itemTable);
+        if(itemTable.getColumnModel().getColumnCount() > 0) {
+        	itemTable.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
-        login1.setBackground(new Color(24, 118, 242));
-        login1.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login1.setForeground(new Color(255, 255, 255));
-        login1.setText("Add");
-        login1.setBorderPainted(false);
-        login1.setFocusPainted(false);
-        login1.addActionListener(this::addItemMessage);
+        addItemBtn.setBackground(new Color(24, 118, 242));
+        addItemBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        addItemBtn.setForeground(new Color(255, 255, 255));
+        addItemBtn.setText("Add");
+        addItemBtn.setBorderPainted(false);
+        addItemBtn.setFocusPainted(false);
+        addItemBtn.addActionListener(this::addItemMessage);
 
-        login2.setBackground(new Color(24, 118, 242));
-        login2.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login2.setForeground(new Color(255, 255, 255));
-        login2.setText("Delete");
-        login2.setBorderPainted(false);
-        login2.setFocusPainted(false);
-        login2.addActionListener(this::deleteItemMessage);
+        deleteItemBtn.setBackground(new Color(24, 118, 242));
+        deleteItemBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        deleteItemBtn.setForeground(new Color(255, 255, 255));
+        deleteItemBtn.setText("Delete");
+        deleteItemBtn.setBorderPainted(false);
+        deleteItemBtn.setFocusPainted(false);
+        deleteItemBtn.addActionListener(this::deleteItemMessage);
 
         keywordTable.setModel(
     		new DefaultTableModel(
@@ -245,51 +233,51 @@ public class Dashboard extends JFrame{
         	keywordTable.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
-        login3.setBackground(new Color(24, 118, 242));
-        login3.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login3.setForeground(new Color(255, 255, 255));
-        login3.setText("Delete");
-        login3.setBorderPainted(false);
-        login3.setFocusPainted(false);
-        login3.addActionListener(this::deleteKeywordMessage);
+        deleteKeywordBtn.setBackground(new Color(24, 118, 242));
+        deleteKeywordBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        deleteKeywordBtn.setForeground(new Color(255, 255, 255));
+        deleteKeywordBtn.setText("Delete");
+        deleteKeywordBtn.setBorderPainted(false);
+        deleteKeywordBtn.setFocusPainted(false);
+        deleteKeywordBtn.addActionListener(this::deleteKeywordMessage);
 
-        login4.setBackground(new Color(24, 118, 242));
-        login4.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login4.setForeground(new Color(255, 255, 255));
-        login4.setText("Add");
-        login4.setBorderPainted(false);
-        login4.setFocusPainted(false);
-        login4.addActionListener(this::addKeywordMessage);
+        addKeywordBtn.setBackground(new Color(24, 118, 242));
+        addKeywordBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        addKeywordBtn.setForeground(new Color(255, 255, 255));
+        addKeywordBtn.setText("Add");
+        addKeywordBtn.setBorderPainted(false);
+        addKeywordBtn.setFocusPainted(false);
+        addKeywordBtn.addActionListener(this::addKeywordMessage);
 
-        jLabel6.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
-        jLabel6.setForeground(new Color(255, 255, 255));
-        jLabel6.setText("Product Based Response");
+        itemBasedL.setFont(new Font("Century Gothic", Font.PLAIN, 14)); // NOI18N
+        itemBasedL.setForeground(new Color(255, 255, 255));
+        itemBasedL.setText("Product Based Response");
 
-        login5.setBackground(new Color(24, 118, 242));
-        login5.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login5.setForeground(new Color(255, 255, 255));
-        login5.setText("Start Bot");
-        login5.setBorderPainted(false);
-        login5.setFocusPainted(false);
-        login5.addActionListener(this::startBot);
-        hasLogined = false;
-        login5.setEnabled(hasLogined);
+        startBotBtn.setBackground(new Color(24, 118, 242));
+        startBotBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        startBotBtn.setForeground(new Color(255, 255, 255));
+        startBotBtn.setText("Start Bot");
+        startBotBtn.setBorderPainted(false);
+        startBotBtn.setFocusPainted(false);
+        startBotBtn.addActionListener(this::startBot);
+        login = false;
+        startBotBtn.setEnabled(login);
 
-        login6.setBackground(new Color(24, 118, 242));
-        login6.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login6.setForeground(new Color(255, 255, 255));
-        login6.setText("Stop Bot");
-        login6.setBorderPainted(false);
-        login6.setFocusPainted(false);
-        login6.addActionListener(this::stopBot);
+        stopBotBtn.setBackground(new Color(24, 118, 242));
+        stopBotBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        stopBotBtn.setForeground(new Color(255, 255, 255));
+        stopBotBtn.setText("Stop Bot");
+        stopBotBtn.setBorderPainted(false);
+        stopBotBtn.setFocusPainted(false);
+        stopBotBtn.addActionListener(this::stopBot);
 
-        login7.setBackground(new Color(24, 118, 242));
-        login7.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
-        login7.setForeground(new Color(255, 255, 255));
-        login7.setText("Edit");
-        login7.setBorderPainted(false);
-        login7.setFocusPainted(false);
-        login7.addActionListener(this::editItemMessage);
+        editItemBtn.setBackground(new Color(24, 118, 242));
+        editItemBtn.setFont(new Font("Century Gothic", Font.BOLD, 14)); // NOI18N
+        editItemBtn.setForeground(new Color(255, 255, 255));
+        editItemBtn.setText("Edit");
+        editItemBtn.setBorderPainted(false);
+        editItemBtn.setFocusPainted(false);
+        editItemBtn.addActionListener(this::editItemMessage);
 
         log.setFont(new Font("Tahoma", Font.PLAIN, 12)); // NOI18N
         log.setForeground(new Color(255, 255, 255));
@@ -304,7 +292,7 @@ public class Dashboard extends JFrame{
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(emailL, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(95, 95, 95))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(email)
@@ -314,29 +302,29 @@ public class Dashboard extends JFrame{
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(password)
                                 .addGap(14, 14, 14)
-                                .addComponent(login, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(loginBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(passwordL, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(keywordBasedL, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(itemBasedL, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(login2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteItemBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(login7, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editItemBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(login1, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addItemBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
                     .addGroup(GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(login5, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(startBotBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(login6, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stopBotBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(log, GroupLayout.PREFERRED_SIZE, 319, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(login3, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteKeywordBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(login4, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addKeywordBtn, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -344,34 +332,34 @@ public class Dashboard extends JFrame{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(emailL)
+                    .addComponent(passwordL))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(email, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                         .addComponent(password, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(login, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(loginBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addComponent(itemBasedL)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(login1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(login2, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(login7, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addItemBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteItemBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editItemBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addComponent(keywordBasedL)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(login4, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(login3, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(login6, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(login5, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addKeywordBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteKeywordBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stopBotBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(startBotBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
                     .addComponent(log, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -501,9 +489,9 @@ public class Dashboard extends JFrame{
         pack();
         
 		//Refresh the DB data
-		//Get DATA from DB for productTable, keywordTable
+		//Get DATA from DB for itemTable, keywordTable
         try {
-			DBHelper.refreshProducts((DefaultTableModel)this.productTable.getModel());
+			DBHelper.refreshProducts((DefaultTableModel)this.itemTable.getModel());
 	        DBHelper.refreshKeywords((DefaultTableModel)this.keywordTable.getModel());
 		} catch (SQLException e1) {
             JOptionPane.showMessageDialog(null, "Error refreshing table.");
@@ -612,10 +600,10 @@ public class Dashboard extends JFrame{
 	
 	//Logout Event
 	private void logoutFacebook() {
-		if(hasLogined) {
-			hasLogined = Automate.getInstance().logout();
-			login.setEnabled(true);
-			login5.setEnabled(hasLogined);
+		if(login) {
+			login = Automate.getInstance().logout();
+			loginBtn.setEnabled(true);
+			startBotBtn.setEnabled(login);
 		}
 	}
 	//Login Event
@@ -627,14 +615,14 @@ public class Dashboard extends JFrame{
 			ThreadPool.getInstance().execute(
                     () -> {
                         try {
-                            hasLogined = Automate.getInstance().login(email, password);
-                            login.setEnabled(false);
+                            login = Automate.getInstance().login(email, password);
+                            loginBtn.setEnabled(false);
                         }catch(CannotLoginException e) {
                             JOptionPane.showMessageDialog(null, "Facebook login failed. Try again.");
                             logger.error(e.getMessage());
                             Automate.getInstance().close();
                         }finally {
-                            login5.setEnabled(hasLogined);
+                            startBotBtn.setEnabled(login);
                         }
                     });
 		}else {
@@ -643,34 +631,34 @@ public class Dashboard extends JFrame{
 	}
 	//product table add Event
 	private void addItemMessage(ActionEvent evt) {
-		new AddItemMessage((DefaultTableModel)this.productTable.getModel());
+		new AddItemMessage((DefaultTableModel)this.itemTable.getModel());
 	}
 	//product table edit event
 	private void editItemMessage(ActionEvent evt) {
-		int numOfRows = this.productTable.getSelectedRowCount();
+		int numOfRows = this.itemTable.getSelectedRowCount();
 		if(numOfRows == 1) {
-			int row = this.productTable.getSelectedRow();
-			int id = (int) this.productTable.getValueAt(row, 0);
-			new EditItemMessage((DefaultTableModel)this.productTable.getModel(), id);
+			int row = this.itemTable.getSelectedRow();
+			int id = (int) this.itemTable.getValueAt(row, 0);
+			new EditItemMessage((DefaultTableModel)this.itemTable.getModel(), id);
 		}else {
 			JOptionPane.showMessageDialog(null, "Please select 1 row.");
 		}
 	}
 	//product table delete Event
 	private void deleteItemMessage(ActionEvent evt) {
-		int numOfRows = this.productTable.getSelectedRowCount();
+		int numOfRows = this.itemTable.getSelectedRowCount();
 		
 		if(numOfRows == 1) {
-			int row = this.productTable.getSelectedRow();
-			int id = (int)this.productTable.getValueAt(row, 0);
-			String question = (String)this.productTable.getValueAt(row, 3);
+			int row = this.itemTable.getSelectedRow();
+			int id = (int)this.itemTable.getValueAt(row, 0);
+			String question = (String)this.itemTable.getValueAt(row, 3);
 			try {
 				DBHelper.deleteProduct(id);
 			} catch (SQLException e) {
 				JOptionPane.showMessageDialog(null, "Error in deleteItemMessage query");
 	            logger.fatal(e.getMessage());
 			}
-			((DefaultTableModel)this.productTable.getModel()).removeRow(row);
+			((DefaultTableModel)this.itemTable.getModel()).removeRow(row);
 			logger.info("["+id+" item's \""+question+"\" message is deleted from the Item table.]");
 		}else {
 			JOptionPane.showMessageDialog(null, "Please select 1 row.");
@@ -753,7 +741,7 @@ Automate.getInstance().browsePosts(log);
             }
         });
 		ThreadPool.getInstance().execute(task);
-		login5.setEnabled(false);
+		startBotBtn.setEnabled(false);
 		logger.info("[Bot start]");
 	}
 
@@ -773,7 +761,7 @@ Automate.getInstance().browsePosts(log);
 
 		isBotOnL.setText("Bot Off");
 		logger.info("[Bot stop]");
-		login5.setEnabled(true);
+		startBotBtn.setEnabled(true);
 	}
 
 }
