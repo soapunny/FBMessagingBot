@@ -3,9 +3,10 @@ package ui;
 import exception.CannotLoginException;
 import exception.ElementNotFoundException;
 import models.Automate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import storages.DBHelper;
 import models.ThreadPool;
-import org.apache.log4j.Logger;
 import util.TmpValueStorage;
 import util.Util;
 
@@ -53,7 +54,7 @@ public class Dashboard extends JFrame{
 	private Runnable task;
 	private TmpValueStorage<Boolean> isBotOn;
 	private boolean login;
-	private static final Logger logger = Logger.getLogger(Dashboard.class);
+	private static final Logger logger = LogManager.getLogger(Dashboard.class);
 	
 	public Dashboard() {
 		initComponents();

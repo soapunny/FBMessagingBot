@@ -1,11 +1,13 @@
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ui.Login;
 import util.Util;
 
 import java.awt.*;
 
 public class Start {
-    private static final Logger logger = Logger.getLogger(Start.class);
+    private static Logger logger = LogManager.getLogger(Start.class);
 
     public static void main(String[] args){
         Util.getLog4j();

@@ -3,7 +3,8 @@ package models.apis;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -14,7 +15,7 @@ import util.Util;
 public class ChromeDriverHelper {
 	private static ChromeDriverHelper instance;
 	private static ChromeDriver conn;
-	private static final Logger logger = Logger.getLogger(ChromeDriverHelper.class);
+	private static final Logger logger = LogManager.getLogger(ChromeDriverHelper.class);
 	private final String WEB_DRIVER_ID = EnvHelper.getInstance().getValue("WEB_DRIVER_ID");
 	private final String WEB_DRIVER_PATH = EnvHelper.getInstance().getValue("WEB_DRIVER_PATH");
 	

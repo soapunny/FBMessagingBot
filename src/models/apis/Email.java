@@ -11,11 +11,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.EnvHelper;
 
 public class Email {
-	public static Logger logger = Logger.getLogger(Email.class);
+	public static Logger logger = LogManager.getLogger(Email.class);
 	private static final String GMAIL_EMAIL = EnvHelper.getInstance().getValue("GMAIL_EMAIL");
 	private static final String GMAIL_PASSWORD = EnvHelper.getInstance().getValue("GMAIL_PASSWORD");
 

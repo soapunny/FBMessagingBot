@@ -14,14 +14,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import org.apache.log4j.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import storages.DBHelper;
 import util.EnvHelper;
 
 public class AddKeywordMessage extends JFrame{
 	private static final long serialVersionUID = 6505714560201573858L;
-	private static Logger logger = Logger.getLogger(AddKeywordMessage.class);
+	private static Logger logger = LogManager.getLogger(AddKeywordMessage.class);
 	
 	private JButton jButton;
     private JLabel jLabel1;

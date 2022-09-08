@@ -16,16 +16,16 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-import org.apache.log4j.Logger;
-
 import enums.DialogType;
 import exception.CannotSleepInThreadException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.Util;
 
 public class Dialog extends JFrame implements Runnable{
 	private static final long serialVersionUID = -4343447438153878098L;
 
-	private static final Logger logger = Logger.getLogger(Dialog.class);
+	private static final Logger logger = LogManager.getLogger(Dialog.class);
 	
 	private JLabel messageL;
 	private JPanel jPanel1;

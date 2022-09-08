@@ -1,12 +1,10 @@
 package util;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,35 +12,37 @@ import enums.FindElementBy;
 import exception.ElementNotFoundException;
 import exception.WebDriverNotFoundException;
 import models.apis.ChromeDriverHelper;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import exception.CannotSleepInThreadException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.MarkerManager;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.internal.DefaultLogBuilder;
+import org.apache.logging.log4j.simple.SimpleLoggerContextFactory;
+import org.apache.logging.log4j.spi.LoggerContextFactory;
+import org.apache.logging.log4j.util.PropertyFilePropertySource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.slf4j.LoggerFactory;
 
 public class Util {
-	public static Logger logger = Logger.getLogger(Util.class);
+	public static Logger logger = LogManager.getLogger(Util.class);
 	
 	public static void getLog4j() {
-		// log4j.properties 파일 불러오고
-		FileInputStream log4jRead;
-		try {
-			log4jRead = new FileInputStream("log/log4j.properties");
-			Properties log4jProperty = new Properties (); 
-			log4jProperty.load (log4jRead);
-			// property 타입으로 읽어서 configure와 연동
-			PropertyConfigurator.configure(log4jProperty);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// log4j2.properties 파일 불러오고
+		//LoggerContext context = (LoggerContext) LogManager.getContext(false);
+		//context.setConfigLocation(new File("../../log/log4j2.properties").toURI());
+		//context.reconfigure();
+		Configurator.initialize("", "log/log4j2.properties");
+
 	}
 
     public static String getValue(String key){

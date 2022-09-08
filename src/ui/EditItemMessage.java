@@ -15,13 +15,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import org.apache.log4j.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import storages.DBHelper;
 
 public class EditItemMessage extends JFrame{
 	private static final long serialVersionUID = -7804242556216963847L;
-	private static Logger logger = Logger.getLogger(EditItemMessage.class);
+	private static Logger logger = LogManager.getLogger(EditItemMessage.class);
 	
 	private JTextField agentName;
 	private JTextField agentNumber;

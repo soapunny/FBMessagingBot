@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
-
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.EnvHelper;
 
 public class DB {
 	private static Connection con;
-	public static Logger logger = Logger.getLogger(DB.class);
+	public static Logger logger = LogManager.getLogger(DB.class);
 
 	public static Connection getInstance() {//singleton
 		if(con == null) {

@@ -13,12 +13,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.EnvHelper;
 
 public class Login extends JFrame{
 	private static final long serialVersionUID = 4131194516522208537L;
-	private static final Logger logger = Logger.getLogger(Login.class);
+	private static final Logger logger = LogManager.getLogger(Login.class);
 
 	private JTextField emailField;
 	private JPasswordField passwordField;

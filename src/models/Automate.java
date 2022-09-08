@@ -7,12 +7,12 @@ import enums.MessageType;
 import exception.*;
 import models.apis.ChromeDriverHelper;
 import models.apis.Email;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import storages.BotAnswers;
 import storages.DBHelper;
 import storages.ExcelHelper;
 import ui.Dialog;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -288,15 +288,10 @@ public class Automate {
 			Util.easySleep(Util.getRandomInt(3000, 5000));
 
 			final String LOAD_MORE_MESSAGE_ELEMENT_XPATH = EnvHelper.getInstance().getValue("LOAD_MORE_MESSAGE_ELEMENT_XPATH");
-			Util.findElement(FindElementBy.XPATH, LOAD_MORE_MESSAGE_ELEMENT_XPATH).click(); // fetch more messages.
-            Util.easySleep(Util.getRandomInt(4000, 6000));
-			Util.findElement(FindElementBy.XPATH, LOAD_MORE_MESSAGE_ELEMENT_XPATH).click(); // fetch more messages.
-            Util.easySleep(Util.getRandomInt(4000, 6000));
-			Util.findElement(FindElementBy.XPATH, LOAD_MORE_MESSAGE_ELEMENT_XPATH).click(); // fetch more messages.
-            Util.easySleep(Util.getRandomInt(4000, 6000));
-			Util.findElement(FindElementBy.XPATH, LOAD_MORE_MESSAGE_ELEMENT_XPATH).click(); // fetch more messages.
-            Util.easySleep(Util.getRandomInt(4000, 6000));
-			Util.findElement(FindElementBy.XPATH, LOAD_MORE_MESSAGE_ELEMENT_XPATH).click(); // fetch more messages.
+			for(int i=0;i<5;i++){
+				Util.findElement(FindElementBy.XPATH, LOAD_MORE_MESSAGE_ELEMENT_XPATH).click(); // fetch more messages.
+				Util.easySleep(Util.getRandomInt(4000, 6000));
+			}
         }catch(ElementNotFoundException e) {//If there is no new Message.
             logger.debug("No more message to fetch or no 'touchable primary' element");
         } catch (CannotConnectToLinkException e) {
@@ -515,10 +510,11 @@ public class Automate {
 	private void seeOld1to1Messages() {
         try{
 			final String LOAD_MORE_1_TO_1_MESSAGES_ELEMENT_XPATH = EnvHelper.getInstance().getValue("LOAD_MORE_1_TO_1_MESSAGES_ELEMENT_XPATH");
-        	while(true) {
+
+			for(int i=0;i<5;i++) {
 				Util.findElement(FindElementBy.XPATH, LOAD_MORE_1_TO_1_MESSAGES_ELEMENT_XPATH).click(); // fetch more messages.
-        		Util.easySleep(Util.getRandomInt(3000, 5000));
-        	}
+				Util.easySleep(Util.getRandomInt(4000, 6000));
+			}
         }catch(Exception ex){//If there is no new Message.
         	logger.debug("No more old 1:1 Messages");
         }
@@ -604,7 +600,7 @@ public class Automate {
 				ResultSet record = DBHelper.getRecordByTitle(itemId);//get record about property by ID
 
 				//Click [See Older 1:1 Messages]
-				//seeOld1to1Messages();
+				seeOld1to1Messages();
 
 				//Get messages between the bot and client.
 				messages = new ArrayList<>();

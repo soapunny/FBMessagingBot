@@ -8,14 +8,14 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
-import org.apache.log4j.Logger;
-
 import enums.MessageType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.Util;
 
 public class BotAnswers {
 	private static BotAnswers instance;
-	private static final Logger logger = Logger.getLogger(BotAnswers.class);
+	private static final Logger logger = LogManager.getLogger(BotAnswers.class);
 	public static final String ANSWER_FILE = "answers/answers.properties";
 	public static final String KEY_MAIL_TO_AGENT = "mail.toAgent";
 	public static final String KEY_MAIL_TO_MAINTENANCE = "mail.toMaintenance";
